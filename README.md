@@ -1,6 +1,6 @@
 # Pintu-JAWARA (Pusat Informasi Terpadu)
 
-Portal Layanan Publik dan Informasi Terpadu Balai Penerapan Standar Instrumen Pertanian (BPSIP) Jawa Barat. Dibangun menggunakan **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, dan **Supabase (PostgreSQL)** untuk digitalisasi alur permohonan layanan, pelacakan tiket mandiri, e-billing PNBP, dan monitoring kinerja real-time.
+Portal Layanan Publik dan Informasi Terpadu BRMP Banten. Dibangun menggunakan **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, dan **Supabase (PostgreSQL)** untuk digitalisasi alur permohonan layanan, pelacakan tiket mandiri, e-billing PNBP, dan monitoring kinerja real-time.
 
 ---
 
