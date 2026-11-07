@@ -8,7 +8,7 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 async function runProductionReadinessCheck() {
   console.log("=========================================================");
-  console.log("   PINTU JAWARA BRMP BANTEN — PRODUCTION PRE-FLIGHT AUDIT");
+  console.log("   PINTU JAWARA BRMP BANTEN - PRODUCTION PRE-FLIGHT AUDIT");
   console.log("=========================================================\n");
 
   let passedAll = true;

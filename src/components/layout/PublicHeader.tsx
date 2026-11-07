@@ -51,16 +51,16 @@ export function PublicHeader() {
               <Image
                 src="/logo/Kementerian Pertanian Kementan Logo - Colored - zonalogo.com.svg"
                 alt="Logo BRMP Banten"
-                width={40}
-                height={40}
-                className="h-10 w-auto object-contain transition-transform group-hover:scale-102"
+                width={42}
+                height={42}
+                className="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-102"
                 priority
               />
               <div className="flex flex-col">
-                <span className="text-base sm:text-lg font-bold uppercase tracking-tight text-[#191c19] leading-tight">
+                <span className="text-base sm:text-lg font-black uppercase tracking-tight text-[#191c19] leading-tight">
                   PINTU JAWARA
                 </span>
-                <span className="text-xs font-semibold text-[#52792b] tracking-wide">
+                <span className="text-xs font-black text-[#1e4f28] tracking-wide">
                   BRMP Banten
                 </span>
               </div>

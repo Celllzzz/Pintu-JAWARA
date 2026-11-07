@@ -65,10 +65,10 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
               className="h-8 w-auto object-contain"
             />
             <div>
-              <p className="text-sm font-bold uppercase tracking-tight text-[#191c19]">
+              <p className="text-sm font-black uppercase tracking-tight text-[#191c19]">
                 PINTU JAWARA
               </p>
-              <p className="text-[10px] font-semibold text-[#52792b]">BRMP Banten</p>
+              <p className="text-[10px] font-black text-[#1e4f28] tracking-wide">BRMP Banten</p>
             </div>
           </div>
           <button

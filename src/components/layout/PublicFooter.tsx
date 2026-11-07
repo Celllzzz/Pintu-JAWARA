@@ -20,10 +20,10 @@ export function PublicFooter() {
                 />
               </div>
               <div>
-                <h3 className="text-base font-bold uppercase tracking-tight text-white leading-tight">
+                <h3 className="text-base font-black uppercase tracking-tight text-white leading-tight">
                   PINTU JAWARA
                 </h3>
-                <p className="text-xs font-semibold text-[#e5a91a]">BRMP Banten</p>
+                <p className="text-xs font-black text-[#e5a91a] tracking-wide">BRMP Banten</p>
               </div>
             </div>
             <p className="text-xs text-white/80 leading-relaxed">

@@ -212,7 +212,7 @@ export default function LoginPage() {
       {/* Footer */}
       <footer className="mx-auto w-full max-w-md py-1.5 text-center text-[11px] text-[#475447] space-y-0.5 shrink-0">
         <p>© 2026 BRMP Banten · Pusat Informasi Terpadu</p>
-        <p className="text-[10px] text-[#475447]/80">Badan Perakitan dan Modernisasi Pertanian — Kementerian Pertanian</p>
+        <p className="text-[10px] text-[#475447]/80">Badan Perakitan dan Modernisasi Pertanian - Kementerian Pertanian</p>
       </footer>
     </div>
   );

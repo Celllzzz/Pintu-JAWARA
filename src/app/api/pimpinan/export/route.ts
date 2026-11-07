@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 
   // Build CSV content with UTF-8 BOM (\uFEFF) for Excel compatibility
   const csvLines: string[] = [
-    "\uFEFFLAPORAN KINERJA PELAYANAN PUBLIK — PINTU JAWARA BRMP BANTEN",
+    "\uFEFFLAPORAN KINERJA PELAYANAN PUBLIK - PINTU JAWARA BRMP BANTEN",
     `Waktu Ekspor: ${exportTimestamp}`,
     `Filter Rentang: ${range.toUpperCase()} | Kategori: ${categoryCode.toUpperCase()}`,
     "",

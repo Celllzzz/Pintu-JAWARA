@@ -50,7 +50,7 @@ export default async function PrintReportPage({ searchParams }: PrintPageProps) 
           />
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-base sm:text-lg font-extrabold uppercase tracking-tight text-black leading-tight">
-              PINTU JAWARA — BRMP BANTEN
+              PINTU JAWARA - BRMP BANTEN
             </h1>
             <p className="text-xs font-semibold text-[#1e4f28]">
               Pusat Informasi Terpadu Satu Pintu

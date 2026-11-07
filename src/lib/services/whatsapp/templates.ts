@@ -16,7 +16,7 @@ export function buildWhatsAppMessage(
   const pin = data.pinLast4 || data.whatsappNumber.replace(/\D/g, "").slice(-4);
   const trackLink = data.trackUrl || (baseUrl ? `${baseUrl}/lacak?ticket=${data.ticketNumber}&pin=${pin}` : `/lacak?ticket=${data.ticketNumber}&pin=${pin}`);
 
-  const header = `*PINTU JAWARA — BRMP BANTEN*\n_Pusat Informasi Terpadu_\n----------------------------------------`;
+  const header = `*PINTU JAWARA - BRMP BANTEN*\n_Pusat Informasi Terpadu_\n----------------------------------------`;
   const footer = `----------------------------------------\nLayanan resmi BRMP Banten.\nInformasi & bantuan: 0851-1121-6203`;
 
   switch (event) {

@@ -6,10 +6,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Pintu JAWARA — BRMP Banten",
+    default: "Pintu JAWARA - BRMP Banten",
     template: "%s | Pintu JAWARA",
   },
-  description: "Pusat Informasi Terpadu — Balai Besar Penerapan Modernisasi Pertanian (BRMP) Banten, Kementerian Pertanian",
+  description: "Pusat Informasi Terpadu - Balai Besar Penerapan Modernisasi Pertanian (BRMP) Banten, Kementerian Pertanian",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    siteName: "Pintu JAWARA — BRMP Banten",
-    title: "Pintu JAWARA — Pusat Informasi Terpadu",
+    siteName: "Pintu JAWARA - BRMP Banten",
+    title: "Pintu JAWARA - Pusat Informasi Terpadu",
     description: "Layanan permohonan informasi publik, benih & bibit sumber UPBS, magang, pengujian lab, dan konsultasi pertanian BRMP Banten.",
   },
   twitter: {
     card: "summary",
-    title: "Pintu JAWARA — BRMP Banten",
-    description: "Pusat Informasi Terpadu — BRMP Banten, Kementerian Pertanian",
+    title: "Pintu JAWARA - BRMP Banten",
+    description: "Pusat Informasi Terpadu - BRMP Banten, Kementerian Pertanian",
   },
 };
 

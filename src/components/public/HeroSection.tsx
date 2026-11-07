@@ -5,9 +5,9 @@ export function HeroSection() {
   return (
     <section className="rounded-2xl bg-[#1e4f28] p-6 sm:p-10 text-white shadow-sm">
       <div className="max-w-3xl space-y-4">
-        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-white text-balance leading-tight">
-          Pintu JAWARA — Pusat Informasi Terpadu
-        </h1>
+          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-white text-balance leading-tight">
+            Pintu JAWARA - Pusat Informasi Terpadu
+          </h1>
         <p className="text-sm sm:text-base text-white/85 leading-relaxed text-pretty">
           Akses terpadu satu pintu untuk 8 layanan resmi BRMP Banten: Penyediaan Benih &amp; Bibit Sumber (UPBS),
           Informasi Publik (PPID), Magang/PKL, Kunjungan Edukasi, Pengujian Laboratorium Mutu &amp; Tanah,

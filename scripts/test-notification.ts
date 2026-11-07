@@ -45,7 +45,7 @@ async function runNotificationTests() {
 
   for (const ev of events) {
     const text = buildWhatsAppMessage(ev, sampleData);
-    assert(text.includes("PINTU JAWARA — BRMP BANTEN"), `Header missing in ${ev}`);
+    assert(text.includes("PINTU JAWARA - BRMP BANTEN"), `Header missing in ${ev}`);
     assert(text.includes(sampleData.ticketNumber), `Ticket number missing in ${ev}`);
     assert(text.includes(sampleData.applicantName), `Applicant name missing in ${ev}`);
     assert(text.includes("/lacak?ticket="), `Track link missing in ${ev}`);
