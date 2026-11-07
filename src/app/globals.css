@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  --surface: #f8faf4;
+  --surface-container-lowest: #ffffff;
+  --primary: #1e4f28;
+  --secondary: #52792b;
+  --tertiary: #e5a91a;
+  --on-surface: #191c19;
+  --on-surface-muted: #475447;
+  --outline: #d1ded0;
+  --outline-variant: #e2e8f0;
+
+  --status-info-bg: #eff6ff;
+  --status-info-text: #1e40af;
+  --status-info-border: #bfdbfe;
+
+  --status-active-bg: #f0fdf4;
+  --status-active-text: #1e4f28;
+  --status-active-border: #bbf7d0;
+
+  --status-warning-bg: #fffbeb;
+  --status-warning-text: #92400e;
+  --status-warning-border: #fde68a;
+
+  --status-error-bg: #fef2f2;
+  --status-error-text: #991b1b;
+  --status-error-border: #fecaca;
+
+  --status-success-bg: #ecfdf5;
+  --status-success-text: #065f46;
+  --status-success-border: #a7f3d0;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --font-plus-jakarta-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-open-sans: "Open Sans", system-ui, sans-serif;
+  --font-roboto: "Roboto", monospace;
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-muted: var(--on-surface-muted);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --color-status-info-bg: var(--status-info-bg);
+  --color-status-info-text: var(--status-info-text);
+  --color-status-info-border: var(--status-info-border);
+
+  --color-status-active-bg: var(--status-active-bg);
+  --color-status-active-text: var(--status-active-text);
+  --color-status-active-border: var(--status-active-border);
+
+  --color-status-warning-bg: var(--status-warning-bg);
+  --color-status-warning-text: var(--status-warning-text);
+  --color-status-warning-border: var(--status-warning-border);
+
+  --color-status-error-bg: var(--status-error-bg);
+  --color-status-error-text: var(--status-error-text);
+  --color-status-error-border: var(--status-error-border);
+
+  --color-status-success-bg: var(--status-success-bg);
+  --color-status-success-text: var(--status-success-text);
+  --color-status-success-border: var(--status-success-border);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-body: var(--font-open-sans);
+  --font-mono: var(--font-roboto);
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-backdrop-in {
+  animation: backdrop-in 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-dialog-in {
+  animation: dialog-in 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-drawer-in {
+  animation: drawer-in 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-toast-in,
+  .animate-backdrop-in,
+  .animate-dialog-in,
+  .animate-drawer-in {
+    animation: none !important;
+  }
+}
+
