@@ -11,7 +11,7 @@ function formatRupiah(val: number): string {
 export function buildWhatsAppMessage(
   event: WhatsAppEvent,
   data: WhatsAppNotificationData,
-  baseUrl = process.env.NEXT_PUBLIC_APP_URL || ""
+  baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pintu-jawara.vercel.app"
 ): string {
   const pin = data.pinLast4 || data.whatsappNumber.replace(/\D/g, "").slice(-4);
   const trackLink = data.trackUrl || (baseUrl ? `${baseUrl}/lacak?ticket=${data.ticketNumber}&pin=${pin}` : `/lacak?ticket=${data.ticketNumber}&pin=${pin}`);

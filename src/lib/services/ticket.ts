@@ -153,21 +153,67 @@ export function computeSlaInfo(
   };
 }
 
-/**
- * Fetches all active holiday dates for working-day calculations
- */
-export async function getHolidaysSet(): Promise<Set<string>> {
-  const supabase = createAdminClient();
-  const { data } = await supabase
-    .from("holidays")
-    .select("date")
-    .is("deleted_at", null);
+let memoryHolidaysCache: { set: Set<string>; timestamp: number } | null = null;
+const HOLIDAYS_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 
-  const set = new Set<string>();
-  if (data) {
-    data.forEach((h) => set.add(h.date));
+export async function getHolidaysSet(year?: number): Promise<Set<string>> {
+  const now = Date.now();
+  if (!year && memoryHolidaysCache && now - memoryHolidaysCache.timestamp < HOLIDAYS_CACHE_TTL_MS) {
+    return memoryHolidaysCache.set;
   }
-  return set;
+
+  try {
+    const url = year
+      ? `https://api.kemendesa.link/libur-nasional/api/holidays/${year}.json`
+      : "https://api.kemendesa.link/libur-nasional/api/holidays/latest";
+
+    const res = await fetch(url, {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(5000),
+    });
+
+    if (!res.ok) {
+      if (memoryHolidaysCache) return memoryHolidaysCache.set;
+      return new Set<string>();
+    }
+
+    const json = (await res.json()) as { data?: Array<{ date: string }> };
+    const set = new Set<string>();
+    if (Array.isArray(json.data)) {
+      for (const item of json.data) {
+        if (item.date) set.add(item.date);
+      }
+    }
+
+    if (!year) {
+      memoryHolidaysCache = { set, timestamp: now };
+    }
+    return set;
+  } catch {
+    if (memoryHolidaysCache) return memoryHolidaysCache.set;
+    return new Set<string>();
+  }
+}
+
+export async function checkIsHoliday(dateStr: string): Promise<boolean> {
+  try {
+    const res = await fetch(
+      `https://api.kemendesa.link/libur-nasional/api/is-holiday?date=${encodeURIComponent(dateStr)}`,
+      {
+        headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(5000),
+      }
+    );
+    if (!res.ok) {
+      const set = await getHolidaysSet();
+      return set.has(dateStr);
+    }
+    const json = (await res.json()) as { is_holiday?: boolean };
+    return Boolean(json.is_holiday);
+  } catch {
+    const set = await getHolidaysSet();
+    return set.has(dateStr);
+  }
 }
 
 export interface TicketDetailResult {

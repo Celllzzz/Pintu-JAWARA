@@ -97,7 +97,7 @@ export function CustomSelect({
       {isOpen && (
         <div
           role="listbox"
-          className="absolute left-0 top-full mt-1.5 z-50 min-w-full w-max max-w-[min(420px,calc(100vw-2rem))] max-h-60 overflow-y-auto rounded-xl border border-[#d1ded0] bg-white p-1.5 shadow-xl animate-dialog-in"
+          className="absolute left-0 top-full mt-1.5 z-50 min-w-full w-full max-h-60 overflow-y-auto rounded-xl border border-[#d1ded0] bg-white p-1.5 shadow-xl animate-dialog-in"
         >
           {options.map((opt) => {
             const isSelected = String(opt.value) === String(value);
@@ -119,7 +119,7 @@ export function CustomSelect({
                     : "text-[#191c19] hover:bg-[#f8faf4]"
                 }`}
               >
-                <span className="whitespace-nowrap">{opt.label}</span>
+                <span className="text-left">{opt.label}</span>
                 {isSelected && (
                   <Check className="h-3.5 w-3.5 shrink-0 text-[#1e4f28]" />
                 )}

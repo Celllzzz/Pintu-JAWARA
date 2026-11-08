@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { AlertCircle, Calculator, ChevronDown } from "lucide-react";
+import { AlertCircle, Calculator } from "lucide-react";
+import { CustomSelect } from "@/components/ui/CustomSelect";
 import { CatalogVarietyItem } from "@/lib/services/catalog";
 
 interface UPBSSpecFieldProps {
@@ -31,6 +32,17 @@ export function UPBSSpecField({
   );
 
   const numQuantity = parseFloat(quantity) || 0;
+
+  const varietyOptions = useMemo(
+    () =>
+      varieties.map((v) => ({
+        value: v.id,
+        label: `${v.name} · ${formatRupiah(v.price_per_unit)}/${v.unit} · ${
+          v.total_stock > 0 ? `Stok: ${v.total_stock} ${v.unit}` : "Tanyakan Stok"
+        }`,
+      })),
+    [varieties]
+  );
 
   const estimatedCost = useMemo(() => {
     if (mechanism !== "komersial" || !selectedVariety || numQuantity <= 0) {
@@ -121,26 +133,13 @@ export function UPBSSpecField({
         >
           Varietas &amp; Kelas Benih
         </label>
-        <div className="relative">
-          <select
-            id="upbs_variety"
-            required
-            value={selectedVarietyId}
-            onChange={(e) => onSelectVariety(e.target.value)}
-            className="block w-full appearance-none h-11 min-h-[44px] rounded-lg border border-[#d1ded0] bg-white pl-3.5 pr-12 text-xs sm:text-sm text-[#191c19] focus:border-[#1e4f28] focus:outline-none cursor-pointer"
-          >
-            <option value="">-- Pilih Varietas Benih / Bibit --</option>
-            {varieties.map((v) => (
-              <option key={v.id} value={v.id}>
-                {v.name} · {formatRupiah(v.price_per_unit)}/{v.unit} ·{" "}
-                {v.total_stock > 0
-                  ? `Stok: ${v.total_stock} ${v.unit}`
-                  : "Tanyakan Stok"}
-              </option>
-            ))}
-          </select>
-          <ChevronDown className="h-4 w-4 text-[#475447] pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" />
-        </div>
+        <CustomSelect
+          id="upbs_variety"
+          value={selectedVarietyId}
+          onChange={(val) => onSelectVariety(String(val))}
+          options={varietyOptions}
+          placeholder="-- Pilih Varietas Benih / Bibit --"
+        />
       </div>
 
       {/* 3. Jumlah Kuantitas (kg / ekor) */}
