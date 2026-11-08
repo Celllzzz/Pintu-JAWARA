@@ -22,18 +22,20 @@ export default function NotFound() {
       {/* Main Content Card */}
       <div className="mx-auto w-full max-w-lg my-auto py-8">
         <div className="rounded-xl border border-[#d1ded0] bg-white p-6 sm:p-10 shadow-sm text-center">
-          <div className="mx-auto inline-flex items-center justify-center p-3 rounded-2xl bg-[#f0fdf4] border border-[#d1ded0] mb-6">
-            <Image
-              src="/logo/Kementerian Pertanian Kementan Logo - Colored - zonalogo.com.svg"
-              alt="Logo Kementerian Pertanian"
-              width={48}
-              height={48}
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-
-          <div className="inline-block rounded-full bg-[#fef2f2] border border-[#fecaca] px-3 py-1 text-[11px] font-bold font-mono tabular-nums uppercase tracking-wider text-[#991b1b] mb-4">
-            Galat 404 · Halaman Tidak Ditemukan
+          {/* Logo & Error Badge */}
+          <div className="flex flex-col items-center gap-3 mb-6">
+            <div className="p-3 rounded-2xl bg-[#f0fdf4] border border-[#d1ded0]">
+              <Image
+                src="/logo/Kementerian Pertanian Kementan Logo - Colored - zonalogo.com.svg"
+                alt="Logo BRMP Banten"
+                width={48}
+                height={48}
+                className="h-12 w-auto object-contain"
+              />
+            </div>
+            <span className="inline-flex items-center rounded-full bg-[#fef2f2] border border-[#fecaca] px-3 py-1 text-[11px] font-bold font-mono tabular-nums uppercase tracking-wider text-[#991b1b]">
+              Galat 404 · Halaman Tidak Ditemukan
+            </span>
           </div>
 
           <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#191c19] text-balance">
