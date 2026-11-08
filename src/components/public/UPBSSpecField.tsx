@@ -16,6 +16,14 @@ interface UPBSSpecFieldProps {
   onCostCalculated: (cost: number | null) => void;
 }
 
+function formatRupiah(val: number): string {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(val);
+}
+
 export function UPBSSpecField({
   varieties,
   selectedVarietyId,
@@ -61,14 +69,6 @@ export function UPBSSpecField({
     Boolean(selectedVariety) &&
     selectedVariety!.total_stock > 0 &&
     numQuantity > selectedVariety!.total_stock;
-
-  const formatRupiah = (val: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(val);
-  };
 
   return (
     <div className="rounded-xl border border-[#bbf7d0] bg-[#f0fdf4] p-4 sm:p-5 space-y-4">

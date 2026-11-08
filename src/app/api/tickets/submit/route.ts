@@ -41,11 +41,10 @@ export async function POST(req: NextRequest) {
       !applicantName?.trim() ||
       !whatsappNumber?.trim() ||
       !subject?.trim() ||
-      !description?.trim() ||
-      !file
+      !description?.trim()
     ) {
       return NextResponse.json(
-        { error: "Semua bidang formulir dan berkas persyaratan wajib diisi." },
+        { error: "Semua bidang formulir wajib diisi lengkap." },
         { status: 400 }
       );
     }
@@ -60,27 +59,31 @@ export async function POST(req: NextRequest) {
     }
     const pinLast4 = cleanPhoneDigits.slice(-4);
 
-    // File Validation: strictly <= 1MB
-    if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { error: "Ukuran berkas melebihi batas maksimum 1 MB." },
-        { status: 400 }
-      );
-    }
+    const hasFile = Boolean(file && typeof file === "object" && file.size > 0 && file.name);
 
-    // File Validation: strictly PDF or DOC/DOCX
-    const ext = file.name.split(".").pop()?.toLowerCase();
-    const isValidExt = ext === "pdf" || ext === "doc" || ext === "docx";
-    const isValidMime = ALLOWED_MIME_TYPES.includes(file.type);
+    if (hasFile && file) {
+      // File Validation: strictly <= 1MB
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { error: "Ukuran berkas melebihi batas maksimum 1 MB." },
+          { status: 400 }
+        );
+      }
 
-    if (!isValidExt && !isValidMime) {
-      return NextResponse.json(
-        {
-          error:
-            "Format berkas tidak didukung. Harap unggah dokumen dengan format PDF (.pdf) atau Word (.doc, .docx).",
-        },
-        { status: 400 }
-      );
+      // File Validation: strictly PDF or DOC/DOCX
+      const ext = file.name.split(".").pop()?.toLowerCase();
+      const isValidExt = ext === "pdf" || ext === "doc" || ext === "docx";
+      const isValidMime = ALLOWED_MIME_TYPES.includes(file.type);
+
+      if (!isValidExt && !isValidMime) {
+        return NextResponse.json(
+          {
+            error:
+              "Format berkas tidak didukung. Harap unggah dokumen dengan format PDF (.pdf) atau Word (.doc, .docx).",
+          },
+          { status: 400 }
+        );
+      }
     }
 
     const supabase = createAdminClient();
@@ -132,39 +135,41 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Upload Document to Supabase Storage Bucket 'documents'
-    const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const storageFilePath = `tickets/${newTicket.id}/${Date.now()}_${sanitizedFileName}`;
+    // 2. Upload Document to Supabase Storage Bucket 'documents' (if provided)
+    if (hasFile && file) {
+      const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const storageFilePath = `tickets/${newTicket.id}/${Date.now()}_${sanitizedFileName}`;
 
-    const arrayBuffer = await file.arrayBuffer();
-    const fileBuffer = Buffer.from(arrayBuffer);
+      const arrayBuffer = await file.arrayBuffer();
+      const fileBuffer = Buffer.from(arrayBuffer);
 
-    const { error: storageError } = await supabase.storage
-      .from("documents")
-      .upload(storageFilePath, fileBuffer, {
-        contentType: file.type || "application/octet-stream",
-        upsert: false,
+      const { error: storageError } = await supabase.storage
+        .from("documents")
+        .upload(storageFilePath, fileBuffer, {
+          contentType: file.type || "application/octet-stream",
+          upsert: false,
+        });
+
+      if (storageError) {
+        // Rollback ticket if storage fails
+        await supabase.from("tickets").delete().eq("id", newTicket.id);
+        return NextResponse.json(
+          { error: `Gagal mengunggah berkas persyaratan: ${storageError.message}` },
+          { status: 500 }
+        );
+      }
+
+      // 3. Insert Document Record
+      await supabase.from("ticket_documents").insert({
+        ticket_id: newTicket.id,
+        document_type: "persyaratan_awal",
+        file_name: file.name,
+        file_path: storageFilePath,
+        file_size_bytes: file.size,
+        mime_type: file.type,
+        uploaded_by_role: "pemohon",
       });
-
-    if (storageError) {
-      // Rollback ticket if storage fails
-      await supabase.from("tickets").delete().eq("id", newTicket.id);
-      return NextResponse.json(
-        { error: `Gagal mengunggah berkas persyaratan: ${storageError.message}` },
-        { status: 500 }
-      );
     }
-
-    // 3. Insert Document Record
-    await supabase.from("ticket_documents").insert({
-      ticket_id: newTicket.id,
-      document_type: "persyaratan_awal",
-      file_name: file.name,
-      file_path: storageFilePath,
-      file_size_bytes: file.size,
-      mime_type: file.type,
-      uploaded_by_role: "pemohon",
-    });
 
     // 4. Record Immutable Audit Log
     await supabase.from("ticket_audit_logs").insert({
@@ -174,10 +179,13 @@ export async function POST(req: NextRequest) {
       new_status: "diajukan",
       actor_type: "pemohon",
       actor_name: applicantName.trim(),
-      notes: `Permohonan baru diajukan oleh pemohon dengan berkas persyaratan: ${file.name}`,
+      notes:
+        hasFile && file
+          ? `Permohonan baru diajukan oleh pemohon dengan berkas persyaratan: ${file.name}`
+          : "Permohonan baru diajukan oleh pemohon tanpa lampiran berkas",
       metadata: {
-        file_name: file.name,
-        file_size_bytes: file.size,
+        file_name: hasFile && file ? file.name : null,
+        file_size_bytes: hasFile && file ? file.size : null,
         category_code: category.code,
       },
     });

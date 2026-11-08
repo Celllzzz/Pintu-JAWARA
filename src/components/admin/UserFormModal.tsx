@@ -46,11 +46,11 @@ function UserFormDialogContent({
   const [formEmail, setFormEmail] = useState(() => editingUser?.email || "");
   const [formFullName, setFormFullName] = useState(() => editingUser?.full_name || "");
   const [formPhone, setFormPhone] = useState(() => editingUser?.phone_number || "");
-  const [formRole, setFormRole] = useState<"admin_l1" | "admin_l2" | "pimpinan">(
-    () => editingUser?.role || "admin_l2"
+  const [formRole, setFormRole] = useState<"admin_l1" | "admin_l2" | "pimpinan" | "">(
+    () => editingUser?.role || ""
   );
   const [formTeamId, setFormTeamId] = useState(
-    () => editingUser?.team_id || teams[0]?.id || ""
+    () => editingUser?.team_id || ""
   );
   const [formPassword, setFormPassword] = useState("");
   const [formIsActive, setFormIsActive] = useState(
@@ -64,10 +64,7 @@ function UserFormDialogContent({
     { value: "pimpinan", label: "Pimpinan" },
   ];
 
-  const teamOptions = [
-    { value: "", label: "-- Pilih Tim Penanganan --" },
-    ...teams.map((t) => ({ value: t.id, label: t.name })),
-  ];
+  const teamOptions = teams.map((t) => ({ value: t.id, label: t.name }));
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -78,6 +75,11 @@ function UserFormDialogContent({
 
     if (formPhone && formPhone.length < 9) {
       showToast("Nomor WhatsApp minimal 9 digit angka.", "warning");
+      return;
+    }
+
+    if (!formRole) {
+      showToast("Peran pengguna wajib dipilih.", "warning");
       return;
     }
 
@@ -219,6 +221,7 @@ function UserFormDialogContent({
                 setFormRole(val as "admin_l1" | "admin_l2" | "pimpinan")
               }
               options={roleOptions}
+              placeholder="-- Pilih Peran Pengguna --"
             />
           </div>
 

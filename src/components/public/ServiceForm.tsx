@@ -128,14 +128,55 @@ export function ServiceForm({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!file) {
-      setFileError("Unggah dokumen persyaratan (KTP / Surat Pengantar).");
-      showToast("Unggah dokumen persyaratan.", "warning");
+
+    if (!selectedCategoryId) {
+      showToast("Pilih kategori layanan utama terlebih dahulu.", "warning");
       return;
     }
 
-    if (isUPBSCategory && !upbsVarietyId) {
-      showToast("Pilih varietas benih/bibit terlebih dahulu.", "warning");
+    if (!selectedSubServiceId) {
+      showToast("Pilih sub-layanan spesifik terlebih dahulu.", "warning");
+      return;
+    }
+
+    if (isUPBSCategory) {
+      if (!upbsVarietyId) {
+        showToast("Pilih varietas benih/bibit terlebih dahulu.", "warning");
+        return;
+      }
+      if (!upbsQuantity.trim() || Number(upbsQuantity) <= 0) {
+        showToast("Jumlah kebutuhan benih/bibit wajib diisi.", "warning");
+        return;
+      }
+    }
+
+    if (!applicantName.trim()) {
+      showToast("Nama lengkap pemohon wajib diisi.", "warning");
+      return;
+    }
+
+    const cleanPhoneDigits = whatsappNumber.replace(/\D/g, "");
+    if (!cleanPhoneDigits) {
+      showToast("Nomor WhatsApp aktif wajib diisi.", "warning");
+      return;
+    }
+    if (cleanPhoneDigits.length < 9) {
+      showToast("Nomor WhatsApp tidak valid (minimal 9 digit angka).", "warning");
+      return;
+    }
+
+    if (!subject.trim()) {
+      showToast("Perihal permohonan wajib diisi.", "warning");
+      return;
+    }
+
+    if (!description.trim()) {
+      showToast("Uraian kebutuhan permohonan wajib diisi.", "warning");
+      return;
+    }
+
+    if (fileError) {
+      showToast(fileError, "warning");
       return;
     }
 
@@ -144,16 +185,18 @@ export function ServiceForm({
       const formData = new FormData();
       formData.append("category_id", selectedCategoryId);
       formData.append("sub_service_id", selectedSubServiceId);
-      formData.append("applicant_name", applicantName);
-      formData.append("whatsapp_number", whatsappNumber);
-      formData.append("subject", subject);
-      formData.append("description", description);
-      formData.append("file", file);
+      formData.append("applicant_name", applicantName.trim());
+      formData.append("whatsapp_number", whatsappNumber.trim());
+      formData.append("subject", subject.trim());
+      formData.append("description", description.trim());
+      if (file) {
+        formData.append("file", file);
+      }
 
       if (isUPBSCategory) {
         formData.append("mechanism", upbsMechanism);
         formData.append("variety_id", upbsVarietyId);
-        formData.append("requested_quantity", upbsQuantity);
+        formData.append("requested_quantity", upbsQuantity.trim());
         if (upbsEstimatedCost) {
           formData.append("estimated_cost", upbsEstimatedCost.toString());
         }

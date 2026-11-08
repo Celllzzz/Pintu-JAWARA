@@ -12,11 +12,10 @@ interface AddVarietyModalProps {
 }
 
 const SEED_CLASS_OPTIONS = [
-  { value: "NONE", label: "Tidak Ada (NONE / Umum)" },
-  { value: "BS", label: "Breeder Seed (BS)" },
-  { value: "FS", label: "Foundation Seed (FS)" },
-  { value: "SS", label: "Stock Seed (SS)" },
-  { value: "ES", label: "Extension Seed (ES)" },
+  { value: "BS", label: "Breeder Seed (BS / Benih Penjenis)" },
+  { value: "FS", label: "Foundation Seed (FS / Benih Dasar)" },
+  { value: "SS", label: "Stock Seed (SS / Benih Pokok)" },
+  { value: "ES", label: "Extension Seed (ES / Benih Sebar)" },
 ];
 
 export function AddVarietyModal({
@@ -29,7 +28,7 @@ export function AddVarietyModal({
 
   const [name, setName] = useState("");
   const commodity = userCommodity;
-  const [seedClass, setSeedClass] = useState("SS");
+  const [seedClass, setSeedClass] = useState("");
   const [price, setPrice] = useState("");
   const [unit, setUnit] = useState(userCommodity === "ayam" ? "ekor" : "kg");
   const [description, setDescription] = useState("");
@@ -44,6 +43,11 @@ export function AddVarietyModal({
       return;
     }
 
+    if (commodity === "padi" && !seedClass) {
+      showToast("Kelas benih wajib dipilih.", "warning");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/admin/unit/catalog", {
@@ -52,7 +56,7 @@ export function AddVarietyModal({
         body: JSON.stringify({
           name: name.trim(),
           commodity_type: commodity,
-          seed_class: seedClass,
+          seed_class: commodity === "ayam" ? "NONE" : seedClass,
           price_per_unit: Number(price) || 0,
           unit: unit.trim(),
           description: description.trim(),
@@ -112,16 +116,34 @@ export function AddVarietyModal({
             />
           </div>
 
-          <div>
-            <label className="block font-bold uppercase tracking-wider text-[10px] text-[#191c19] mb-1.5">
-              Kelas Benih
-            </label>
-            <CustomSelect
-              value={seedClass}
-              onChange={(val) => setSeedClass(String(val))}
-              options={SEED_CLASS_OPTIONS}
-            />
-          </div>
+          {commodity === "padi" ? (
+            <div>
+              <label className="block font-bold uppercase tracking-wider text-[10px] text-[#191c19] mb-1.5">
+                Kelas Benih
+              </label>
+              <CustomSelect
+                value={seedClass}
+                onChange={(val) => setSeedClass(String(val))}
+                options={SEED_CLASS_OPTIONS}
+                placeholder="-- Pilih Kelas Benih --"
+              />
+            </div>
+          ) : (
+            <div>
+              <label className="block font-bold uppercase tracking-wider text-[10px] text-[#191c19] mb-1.5">
+                Kelas Benih
+              </label>
+              <input
+                type="text"
+                disabled
+                value="Tidak Ada (NONE / Umum)"
+                className="w-full h-11 min-h-[44px] rounded-lg border border-[#d1ded0] bg-[#f8faf4] px-3.5 text-xs sm:text-sm text-[#475447] cursor-not-allowed"
+              />
+              <p className="mt-1 text-[11px] text-[#475447]">
+                Komoditas bibit ayam tidak menggunakan pengelasan benih tanaman.
+              </p>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>

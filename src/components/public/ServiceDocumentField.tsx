@@ -26,7 +26,7 @@ export function ServiceDocumentField({
           htmlFor="req_file"
           className="block text-xs font-bold uppercase tracking-wider text-[#191c19] mb-1"
         >
-          Unggah Dokumen (KTP / Surat Permohonan / Pengantar)
+          Unggah Dokumen Pendukung (Opsional)
         </label>
         <p className="text-[11px] text-[#475447] mb-2">
           Format yang diizinkan: <strong>PDF (.pdf)</strong> atau <strong>Word (.doc, .docx)</strong>. Ukuran maksimal <strong>1 MB</strong>.
@@ -35,7 +35,6 @@ export function ServiceDocumentField({
         <input
           id="req_file"
           type="file"
-          required
           accept=".pdf,.doc,.docx"
           onChange={onFileChange}
           className="block w-full text-xs text-[#475447] file:mr-3 file:h-11 file:min-h-[44px] file:rounded-lg file:border-0 file:bg-[#1e4f28] file:px-4 file:text-xs file:font-semibold file:text-white file:hover:bg-[#163c1e] cursor-pointer"
