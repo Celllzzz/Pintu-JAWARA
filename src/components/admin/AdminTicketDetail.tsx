@@ -92,11 +92,11 @@ export function AdminTicketDetail({
 
   return (
     <div className="space-y-5">
-      {/* Mobile Back Button */}
+      {/* Mobile/Tablet Back Button */}
       <button
         type="button"
         onClick={onBackMobile}
-        className="md:hidden flex items-center gap-1.5 text-xs font-semibold text-[#52792b] hover:underline mb-2"
+        className="lg:hidden flex items-center gap-1.5 text-xs font-semibold text-[#52792b] hover:underline mb-2"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         <span>Kembali ke Daftar Antrean</span>

@@ -58,7 +58,7 @@ export function AdminTicketQueue({
   isLoading,
 }: AdminTicketQueueProps) {
   return (
-    <div className="flex flex-col h-full space-y-3">
+    <div className="flex flex-col h-full space-y-3.5 px-0.5">
       {/* Search Input */}
       <div className="relative">
         <Search className="h-4 w-4 text-[#475447] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -72,11 +72,13 @@ export function AdminTicketQueue({
       </div>
 
       {/* Filter Pills */}
-      <FilterPills
-        items={FILTER_ITEMS}
-        activeId={statusFilter}
-        onChange={onStatusFilterChange}
-      />
+      <div className="-mx-0.5">
+        <FilterPills
+          items={FILTER_ITEMS}
+          activeId={statusFilter}
+          onChange={onStatusFilterChange}
+        />
+      </div>
 
       {/* Ticket List Header */}
       <div className="flex items-center justify-between text-xs text-[#475447] px-1 pt-1">

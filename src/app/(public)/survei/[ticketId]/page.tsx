@@ -98,7 +98,7 @@ export default async function SurveyTicketPage({ params }: PageProps) {
           href={`/lacak?ticket=${ticket.ticket_number}&pin=${ticket.whatsapp_pin_last4}`}
           className="text-xs font-semibold text-[#52792b] hover:underline"
         >
-          ← Kembali ke Detail Permohonan
+          Kembali ke Detail Permohonan
         </Link>
         <span className="text-[10px] font-bold uppercase tracking-wider text-[#52792b] block mt-2">
           EVALUASI PELAYANAN PUBLIK

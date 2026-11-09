@@ -20,7 +20,7 @@ export default async function PimpinanDashboardPage() {
   const [metrics, overdueTickets, reportRows, categoriesRes] = await Promise.all([
     getLiveKPIMetrics(),
     getOverdueTickets(),
-    getReport8ColumnData({ range: "all", categoryCode: "all" }),
+    getReport8ColumnData({ range: "all", categoryCode: "all", limit: 50 }),
     supabase
       .from("service_categories")
       .select("code, name")

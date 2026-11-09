@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Search, Sprout } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -9,10 +8,9 @@ export default function NotFound() {
       <div className="mx-auto w-full max-w-4xl flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-[#1e4f28] hover:text-[#163c1e] hover:underline min-h-[44px] py-2 px-1 focus-visible:outline-2 focus-visible:outline-[#1e4f28]"
+          className="inline-flex items-center text-xs font-bold text-[#1e4f28] hover:text-[#163c1e] hover:underline min-h-[44px] py-2 px-1 focus-visible:outline-2 focus-visible:outline-[#1e4f28]"
         >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          <span>Kembali ke Beranda</span>
+          Kembali ke Beranda
         </Link>
         <span className="text-[11px] font-semibold uppercase tracking-wider text-[#475447]">
           Pintu JAWARA
@@ -56,10 +54,9 @@ export default function NotFound() {
 
             <Link
               href="/lacak"
-              className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-[#d1ded0] bg-white px-5 text-xs sm:text-sm font-bold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
+              className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center rounded-lg border border-[#d1ded0] bg-white px-6 text-xs sm:text-sm font-bold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
             >
-              <Search className="h-4 w-4 text-[#475447]" aria-hidden="true" />
-              <span>Lacak Tiket</span>
+              Lacak Tiket
             </Link>
           </div>
 
@@ -68,10 +65,9 @@ export default function NotFound() {
               Mencari bibit atau benih unggul?{" "}
               <Link
                 href="/katalog"
-                className="font-bold text-[#1e4f28] hover:underline inline-flex items-center gap-1"
+                className="font-bold text-[#1e4f28] hover:underline"
               >
-                <Sprout className="h-3.5 w-3.5 inline" aria-hidden="true" />
-                <span>Lihat Katalog UPBS</span>
+                Lihat Katalog UPBS
               </Link>
             </p>
           </div>

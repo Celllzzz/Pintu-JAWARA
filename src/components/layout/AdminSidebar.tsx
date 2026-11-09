@@ -12,6 +12,7 @@ import {
   Settings,
   X,
   Sprout,
+  MessageSquareQuote,
 } from "lucide-react";
 import { UserRole } from "@/types/database";
 
@@ -59,6 +60,12 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
       href: "/admin/tickets",
       roles: ["admin_l1"],
       icon: ClipboardList,
+    },
+    {
+      label: "Rekapitulasi Survei",
+      href: "/admin/survei",
+      roles: ["admin_l1"],
+      icon: MessageSquareQuote,
     },
     {
       label: "Antrean Unit Saya",
@@ -140,7 +147,7 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
             type="button"
             onClick={onClose}
             aria-label="Tutup menu"
-            className="md:hidden flex h-8 w-8 min-h-[32px] min-w-[32px] items-center justify-center rounded-lg border border-[#d1ded0] text-sm text-[#191c19]"
+            className="lg:hidden flex h-8 w-8 min-h-[32px] min-w-[32px] items-center justify-center rounded-lg border border-[#d1ded0] text-sm text-[#191c19]"
           >
             <X className="h-4 w-4" />
           </button>
@@ -213,16 +220,16 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
   return (
     <>
       {/* Desktop Persistent Sidebar */}
-      <aside className="hidden md:block w-64 shrink-0 border-r border-[#d1ded0] bg-white h-screen sticky top-0">
+      <aside className="hidden lg:block w-64 shrink-0 border-r border-[#d1ded0] bg-white h-screen sticky top-0">
         {sidebarContent}
       </aside>
 
-      {/* Mobile Drawer */}
+      {/* Mobile & Tablet Drawer */}
       {isOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex md:hidden"
+          className="fixed inset-0 z-50 flex lg:hidden"
         >
           <div
             className="fixed inset-0 bg-black/40 backdrop-blur-[2px] animate-backdrop-in"

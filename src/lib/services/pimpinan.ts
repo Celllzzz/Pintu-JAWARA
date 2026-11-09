@@ -38,16 +38,20 @@ export interface Report8ColumnItem {
 
 export function formatExportTimestamp(d = new Date()): string {
   const dateFormatted = d.toLocaleDateString("id-ID", {
+    timeZone: "Asia/Jakarta",
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  const timeFormatted = d.toLocaleTimeString("id-ID", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  const timeFormatted = d
+    .toLocaleTimeString("id-ID", {
+      timeZone: "Asia/Jakarta",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    })
+    .replace(":", ".");
   return `${dateFormatted}, Pukul ${timeFormatted} WIB`;
 }
 
@@ -209,6 +213,7 @@ export async function getOverdueTickets(): Promise<OverdueTicketItem[]> {
 export async function getReport8ColumnData(params?: {
   range?: string;
   categoryCode?: string;
+  limit?: number;
 }): Promise<Report8ColumnItem[]> {
   const supabase = createAdminClient();
 
@@ -231,6 +236,10 @@ export async function getReport8ColumnData(params?: {
     `)
     .is("deleted_at", null)
     .order("created_at", { ascending: false });
+
+  if (params?.limit) {
+    query = query.limit(params.limit);
+  }
 
   if (params?.categoryCode && params.categoryCode !== "all") {
     query = query.eq("service_categories.code", params.categoryCode);
@@ -260,12 +269,14 @@ export async function getReport8ColumnData(params?: {
 
   return data.map((row) => ({
     tanggal_pengajuan: new Date(row.created_at).toLocaleDateString("id-ID", {
+      timeZone: "Asia/Jakarta",
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
     }),
     tanggal_penyelesaian: row.completed_at
       ? new Date(row.completed_at).toLocaleDateString("id-ID", {
+          timeZone: "Asia/Jakarta",
           day: "2-digit",
           month: "2-digit",
           year: "numeric",

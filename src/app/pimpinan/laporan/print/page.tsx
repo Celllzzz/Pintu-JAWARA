@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { getCurrentUser } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
 import {
@@ -38,42 +37,19 @@ export default async function PrintReportPage({ searchParams }: PrintPageProps) 
         <PrintActionButtons />
       </div>
 
-      {/* Official Letterhead Header */}
-      <div className="border-b-2 border-black pb-4 mb-6">
-        <div className="flex items-center gap-4">
-          <Image
-            src="/logo/Kementerian Pertanian Kementan Logo - Colored - zonalogo.com.svg"
-            alt="Logo BRMP Banten"
-            width={56}
-            height={56}
-            className="h-14 w-auto object-contain shrink-0"
-          />
-          <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-base sm:text-lg font-extrabold uppercase tracking-tight text-black leading-tight">
-              PINTU JAWARA - BRMP BANTEN
-            </h1>
-            <p className="text-xs font-semibold text-[#1e4f28]">
-              Pusat Informasi Terpadu Satu Pintu
-            </p>
-            <p className="text-[11px] text-[#475447] mt-0.5">
-              Jl. Ciptayasa KM 01, Ciruas, Kabupaten Serang, Provinsi Banten 42182 · Telp: (0254) 281055
-            </p>
-          </div>
+      {/* Header Laporan Resmi (Tanpa Kop Surat) */}
+      <div className="border-b-2 border-black pb-3 mb-4 flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
+        <div>
+          <h1 className="font-bold uppercase tracking-wider text-xs sm:text-sm text-black">
+            LAPORAN KINERJA PELAYANAN PUBLIK (TABEL 8 KOLOM BAKU)
+          </h1>
+          <p className="text-[11px] text-[#475447] mt-0.5">
+            Filter: {range === "all" ? "Semua Waktu" : range.toUpperCase()} | Kategori: {categoryCode.toUpperCase()}
+          </p>
         </div>
-
-        <div className="mt-4 pt-3 border-t border-[#e2e8f0] flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
-          <div>
-            <span className="font-bold uppercase tracking-wider text-[11px] text-black">
-              LAPORAN KINERJA PELAYANAN PUBLIK (TABEL 8 KOLOM BAKU)
-            </span>
-            <p className="text-[11px] text-[#475447]">
-              Filter: {range === "all" ? "Semua Waktu" : range.toUpperCase()} | Kategori: {categoryCode.toUpperCase()}
-            </p>
-          </div>
-          <div className="text-left sm:text-right text-[11px]">
-            <span className="font-semibold text-black block">Waktu Cetak / Ekspor Resmi:</span>
-            <span className="font-mono tabular-nums text-[#475447]">{exportTimestamp}</span>
-          </div>
+        <div className="text-left sm:text-right text-[11px]">
+          <span className="font-semibold text-black block">Waktu Cetak / Ekspor Resmi:</span>
+          <span className="font-mono tabular-nums text-[#475447]">{exportTimestamp}</span>
         </div>
       </div>
 
@@ -135,25 +111,6 @@ export default async function PrintReportPage({ searchParams }: PrintPageProps) 
             )}
           </tbody>
         </table>
-      </div>
-
-      {/* Official Signature Area */}
-      <div className="mt-12 flex justify-between items-start text-xs print:break-inside-avoid">
-        <div className="text-[11px] text-[#475447]">
-          <p>Dokumen ini dicetak otomatis dari sistem Pintu JAWARA.</p>
-          <p>Akuntabilitas data terintegrasi Zona Integritas BRMP Banten.</p>
-        </div>
-
-        <div className="text-center w-64 space-y-16">
-          <div>
-            <p>Ciruas, {new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</p>
-            <p className="font-semibold">Kepala / Pimpinan BRMP Banten</p>
-          </div>
-          <div className="border-t border-black pt-1">
-            <p className="font-bold text-black">( .................................................... )</p>
-            <p className="text-[10px] text-[#475447]">NIP. ........................................</p>
-          </div>
-        </div>
       </div>
     </div>
   );

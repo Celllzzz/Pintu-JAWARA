@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { HeroSection } from "@/components/public/HeroSection";
 
+export const revalidate = 3600;
+
 interface ServiceItem {
   code: string;
   title: string;

@@ -34,11 +34,12 @@ export function ExportActionBar({
     const params = new URLSearchParams({
       range: selectedRange,
       kategori: selectedCategory,
+      format: "xlsx",
     });
     const downloadUrl = `/api/pimpinan/export?${params.toString()}`;
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.setAttribute("download", `laporan_pintu_jawara_${Date.now()}.csv`);
+    link.setAttribute("download", `laporan_kinerja_pelayanan_${Date.now()}.xlsx`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -105,7 +106,7 @@ export function ExportActionBar({
             onClick={handleExportCsv}
             className="flex h-10 min-h-[40px] items-center justify-center rounded-lg bg-[#1e4f28] px-4 text-xs font-semibold text-white shadow-sm hover:bg-[#163c1e] transition-colors"
           >
-            <span>Ekspor Excel (.csv)</span>
+            <span>Ekspor Excel (.xlsx)</span>
           </button>
 
           <button

@@ -25,7 +25,7 @@ export function FilterPills({
     <div
       role="tablist"
       aria-label="Filter antrean"
-      className={`flex items-center gap-2 overflow-x-auto pb-1 text-sm no-scrollbar ${className}`}
+      className={`flex items-center gap-2 overflow-x-auto px-1 py-0.5 scroll-px-3 text-sm no-scrollbar ${className}`}
     >
       {items.map((item) => {
         const isActive = item.id === activeId;

@@ -106,7 +106,7 @@ export function AdminTicketsWorkspace({
           <button
             type="button"
             onClick={refreshTickets}
-            className="h-9 min-h-[36px] px-3 rounded-lg border border-[#d1ded0] bg-white text-xs font-semibold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
+            className="h-9 min-h-[36px] px-3.5 rounded-lg border border-[#d1ded0] bg-white text-xs font-semibold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
           >
             Segarkan
           </button>

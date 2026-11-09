@@ -60,7 +60,8 @@ export default async function AdminTicketsPage() {
         )
       `)
       .is("deleted_at", null)
-      .order("created_at", { ascending: false }),
+      .order("created_at", { ascending: false })
+      .limit(50),
 
     supabase
       .from("teams")

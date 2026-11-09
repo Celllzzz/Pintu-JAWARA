@@ -52,6 +52,13 @@ export function CommandMenu({ userRole = "admin_l1" }: CommandMenuProps) {
           onSelect: () => router.push("/admin/tickets"),
         },
         {
+          id: "nav-surveys",
+          label: "Rekapitulasi Survei SKM",
+          category: "Layanan",
+          shortcut: "S",
+          onSelect: () => router.push("/admin/survei"),
+        },
+        {
           id: "nav-users",
           label: "Manajemen Akun Petugas",
           category: "Petugas",
@@ -177,10 +184,10 @@ export function CommandMenu({ userRole = "admin_l1" }: CommandMenuProps) {
         type="button"
         onClick={openMenu}
         aria-label="Buka pencarian cepat (Ctrl+K)"
-        className="flex items-center gap-2 h-10 px-3 rounded-lg border border-[#d1ded0] bg-[#f8faf4] text-xs text-[#475447] hover:bg-white hover:border-[#52792b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1e4f28]"
+        className="flex items-center gap-2 h-10 px-2.5 sm:px-3 rounded-lg border border-[#d1ded0] bg-[#f8faf4] text-xs text-[#475447] hover:bg-white hover:border-[#52792b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1e4f28]"
       >
         <svg
-          className="h-4 w-4 text-[#475447]"
+          className="h-4 w-4 text-[#475447] shrink-0"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -193,8 +200,8 @@ export function CommandMenu({ userRole = "admin_l1" }: CommandMenuProps) {
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
         </svg>
-        <span className="hidden sm:inline">Pencarian Cepat...</span>
-        <kbd className="hidden sm:inline-flex items-center rounded border border-[#d1ded0] bg-white px-1.5 py-0.5 text-[10px] font-semibold text-[#475447]">
+        <span className="hidden lg:inline">Pencarian Cepat...</span>
+        <kbd className="hidden lg:inline-flex items-center rounded border border-[#d1ded0] bg-white px-1.5 py-0.5 text-[10px] font-semibold text-[#475447]">
           Ctrl K
         </kbd>
       </button>

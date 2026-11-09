@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { getCachedServiceCategories, getCachedSubServices } from "@/lib/services/categories";
 import { getActiveVarieties } from "@/lib/services/catalog";
 import { ServiceForm } from "@/components/public/ServiceForm";
 
@@ -12,26 +12,11 @@ export default async function AjukanPage({ searchParams }: PageProps) {
   const initialCategoryCode = params.kategori || "";
   const initialVarietyId = params.varietas || "";
 
-  const supabase = createAdminClient();
-
-  const [categoriesRes, subServicesRes, varieties] = await Promise.all([
-    supabase
-      .from("service_categories")
-      .select("id, code, name, sla_days, is_commercial")
-      .is("deleted_at", null)
-      .order("code", { ascending: true }),
-
-    supabase
-      .from("sub_services")
-      .select("id, category_id, name")
-      .is("deleted_at", null)
-      .order("name", { ascending: true }),
-
+  const [categories, subServices, varieties] = await Promise.all([
+    getCachedServiceCategories(),
+    getCachedSubServices(),
     getActiveVarieties(),
   ]);
-
-  const categories = categoriesRes.data || [];
-  const subServices = subServicesRes.data || [];
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-10 space-y-6">

@@ -95,11 +95,11 @@ export function UnitTicketDetail({
 
   return (
     <div className="space-y-5">
-      {/* Mobile Back Button */}
+      {/* Mobile/Tablet Back Button */}
       <button
         type="button"
         onClick={onBackMobile}
-        className="md:hidden flex items-center text-xs font-semibold text-[#52792b] hover:underline mb-2"
+        className="lg:hidden flex items-center text-xs font-semibold text-[#52792b] hover:underline mb-2"
       >
         <span>← Kembali ke Daftar Antrean</span>
       </button>

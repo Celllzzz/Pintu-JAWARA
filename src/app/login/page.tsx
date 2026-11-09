@@ -41,8 +41,7 @@ function LoginForm() {
 
       showToast("Berhasil masuk. Mengalihkan...", "success");
       const target = returnUrl || data.redirectUrl || "/admin/tickets";
-      router.push(target);
-      router.refresh();
+      window.location.href = target;
     } catch {
       setErrorMessage("Terjadi gangguan koneksi. Silakan coba kembali.");
       showToast("Gangguan koneksi jaringan", "error");

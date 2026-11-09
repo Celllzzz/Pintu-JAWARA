@@ -85,6 +85,8 @@ export default async function AdminUnitTicketsPage() {
     query = query.eq("team_id", user.team_id);
   }
 
+  query = query.limit(50);
+
   const { data: tickets } = await query;
 
   return (

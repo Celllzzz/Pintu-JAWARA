@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { AlertTriangle, RotateCcw, Home } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 export default function ErrorBoundary({
   error,
@@ -40,18 +40,16 @@ export default function ErrorBoundary({
           <button
             type="button"
             onClick={() => reset()}
-            className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-[#1e4f28] px-5 text-xs sm:text-sm font-bold text-white hover:bg-[#163c1e] transition-colors"
+            className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center rounded-lg bg-[#1e4f28] px-6 text-xs sm:text-sm font-bold text-white hover:bg-[#163c1e] transition-colors"
           >
-            <RotateCcw className="h-4 w-4" aria-hidden="true" />
-            <span>Coba Lagi</span>
+            Coba Lagi
           </button>
 
           <Link
             href="/"
-            className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-[#d1ded0] bg-white px-5 text-xs sm:text-sm font-bold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
+            className="flex h-11 min-h-[44px] w-full sm:w-auto items-center justify-center rounded-lg border border-[#d1ded0] bg-white px-6 text-xs sm:text-sm font-bold text-[#191c19] hover:bg-[#f8faf4] transition-colors"
           >
-            <Home className="h-4 w-4 text-[#475447]" aria-hidden="true" />
-            <span>Ke Beranda</span>
+            Ke Beranda
           </Link>
         </div>
 
