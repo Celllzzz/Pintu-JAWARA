@@ -112,9 +112,13 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
             Portal Petugas
           </Link>
           <div className="mt-3 text-center text-[11px] text-[#475447] leading-relaxed">
-            <p className="font-semibold text-[#191c19]">Jam Pelayanan Publik:</p>
-            <p>Senin–Kamis: 07.30–16.00 WIB</p>
-            <p>Jumat: 07.30–16.30 WIB</p>
+            <p className="font-semibold text-[#191c19]">Waktu Pelayanan:</p>
+            <p className="mt-1 font-medium">Senin – Kamis</p>
+            <p>09.00 – 15.00 WIB</p>
+            <p className="text-[10px] text-[#475447]/80">Istirahat 12.00 – 13.00</p>
+            <p className="mt-1 font-medium">Jumat</p>
+            <p>09.00 – 15.30 WIB</p>
+            <p className="text-[10px] text-[#475447]/80">Istirahat 11.00 – 13.00 WIB</p>
           </div>
         </div>
       </div>

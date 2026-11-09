@@ -28,8 +28,10 @@ export function PublicHeader() {
                 BRMP Banten · Pusat Informasi Terpadu
               </span>
             </div>
-            <div className="hidden sm:flex items-center gap-4 text-white/90">
-              <span>Senin–Kamis 07.30–16.00 · Jumat 07.30–16.30 WIB</span>
+            <div className="hidden sm:flex items-center gap-3 text-white/90">
+              <span title="Istirahat: Senin–Kamis 12.00–13.00, Jumat 11.00–13.00 WIB">
+                Senin–Kamis 09.00–15.00 <span className="hidden lg:inline">(Istirahat 12.00–13.00)</span> · Jumat 09.00–15.30 <span className="hidden lg:inline">(Istirahat 11.00–13.00)</span> WIB
+              </span>
               <span>·</span>
               <a
                 href="https://wa.me/6285111216203"

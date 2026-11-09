@@ -46,16 +46,22 @@ export function PublicFooter() {
           {/* Kolom 2: Jam Pelayanan & Maklumat */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#e5a91a]">
-              Jam Pelayanan Publik
+              Waktu Pelayanan
             </h4>
             <div className="space-y-1.5 text-xs text-white/80 leading-relaxed font-mono tabular-nums">
-              <div className="flex justify-between items-center py-0.5 border-b border-white/10">
+              <div className="flex justify-between items-start py-0.5 border-b border-white/10">
                 <span className="font-sans font-medium text-white">Senin – Kamis</span>
-                <span>07.30 – 16.00 WIB</span>
+                <div className="text-right">
+                  <div>09.00 – 15.00 WIB</div>
+                  <div className="text-[11px] text-white/60 font-sans">Istirahat 12.00 – 13.00</div>
+                </div>
               </div>
-              <div className="flex justify-between items-center py-0.5 border-b border-white/10">
+              <div className="flex justify-between items-start py-0.5 border-b border-white/10">
                 <span className="font-sans font-medium text-white">Jumat</span>
-                <span>07.30 – 16.30 WIB</span>
+                <div className="text-right">
+                  <div>09.00 – 15.30 WIB</div>
+                  <div className="text-[11px] text-white/60 font-sans">Istirahat 11.00 – 13.00 WIB</div>
+                </div>
               </div>
               <div className="flex justify-between items-center py-0.5 border-b border-white/10">
                 <span className="font-sans font-medium text-white/60">Sabtu</span>

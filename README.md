@@ -23,7 +23,7 @@ Portal Layanan Publik dan Informasi Terpadu BRMP Banten. Dibangun menggunakan **
 - **Survei Kepuasan Masyarakat (SKM)**:
   - Terintegrasi PermenPAN-RB No. 14/2017 dengan 9 unsur pelayanan Likert 4 poin dan demografi responden.
 - **Perhitungan SLA Dinamis**:
-  - Perhitungan jam kerja operasional kantor resmi (Senin–Kamis 07.30–16.00 WIB, Jumat 07.30–16.30 WIB, Sabtu–Minggu Libur).
+  - Perhitungan jam kerja operasional kantor resmi (Senin–Kamis 09.00–15.00 WIB [Istirahat 12.00–13.00], Jumat 09.00–15.30 WIB [Istirahat 11.00–13.00], Sabtu–Minggu Libur).
 - **PWA & Offline Support**:
   - Service Worker dengan IndexedDB lokal untuk caching draft permohonan saat koneksi terputus.
 - **Keamanan & Kepatuhan**:
