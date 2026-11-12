@@ -124,10 +124,10 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
       : "Pimpinan";
 
   const sidebarContent = (
-    <div className="flex h-full flex-col justify-between bg-white p-4">
-      <div className="space-y-6">
+    <div className="flex h-full flex-col justify-between bg-white p-4 select-none overflow-hidden">
+      <div className="space-y-4 min-h-0 flex flex-col">
         {/* Branding */}
-        <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-4 px-1">
+        <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-3 px-1 shrink-0">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
               src="/logo/Kementerian Pertanian Kementan Logo - Colored - zonalogo.com.svg"
@@ -154,7 +154,7 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
         </div>
 
         {/* User Info Capsule */}
-        <div className="rounded-xl border border-[#d1ded0] bg-[#f8faf4] p-3 text-xs space-y-1">
+        <div className="rounded-xl border border-[#d1ded0] bg-[#f8faf4] p-3 text-xs space-y-1 shrink-0">
           <p className="font-bold text-[#191c19] truncate" title={user.full_name}>
             {user.full_name}
           </p>
@@ -172,7 +172,7 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
         </div>
 
         {/* Navigation Items */}
-        <nav className="space-y-1">
+        <nav className="space-y-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <p className="px-2 text-[10px] font-bold uppercase tracking-wider text-[#475447]">
             Menu Utama
           </p>
@@ -199,7 +199,7 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
       </div>
 
       {/* Footer Actions */}
-      <div className="border-t border-[#e2e8f0] pt-3 space-y-2">
+      <div className="border-t border-[#e2e8f0] pt-3 space-y-2 shrink-0">
         <Link
           href="/"
           className="flex h-10 min-h-[40px] w-full items-center justify-center rounded-lg border border-[#d1ded0] px-3 text-xs font-semibold text-[#191c19] hover:bg-[#f8faf4]"
@@ -219,8 +219,8 @@ export function AdminSidebar({ user, isOpen, onClose }: AdminSidebarProps) {
 
   return (
     <>
-      {/* Desktop Persistent Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 border-r border-[#d1ded0] bg-white h-screen sticky top-0">
+      {/* Desktop Persistent Fixed Sidebar */}
+      <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 z-30 border-r border-[#d1ded0] bg-white h-screen select-none">
         {sidebarContent}
       </aside>
 

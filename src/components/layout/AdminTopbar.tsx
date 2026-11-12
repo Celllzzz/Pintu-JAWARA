@@ -20,7 +20,7 @@ export interface AdminTopbarProps {
 
 export function AdminTopbar({ user, onOpenSidebar, title }: AdminTopbarProps) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#d1ded0] bg-white px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-[#d1ded0] bg-white px-4 sm:px-6 lg:px-8">
       {/* Left: Mobile/Tablet Sidebar Trigger + Title */}
       <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
         <button

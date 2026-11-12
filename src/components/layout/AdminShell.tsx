@@ -21,7 +21,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#f8faf4] text-[#191c19] overflow-x-hidden">
+    <div className="min-h-screen bg-[#f8faf4] text-[#191c19]">
       {/* Sidebar */}
       <AdminSidebar
         user={user}
@@ -29,8 +29,8 @@ export function AdminShell({ user, children }: AdminShellProps) {
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Main Content Area */}
-      <div className="flex flex-1 flex-col min-w-0 overflow-x-hidden">
+      {/* Main Content Area (offset by fixed sidebar on desktop) */}
+      <div className="lg:pl-64 flex flex-1 flex-col min-w-0 overflow-x-hidden">
         <AdminTopbar
           user={user}
           onOpenSidebar={() => setIsSidebarOpen(true)}
