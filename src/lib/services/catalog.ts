@@ -101,5 +101,5 @@ export const getActiveVarieties = unstable_cache(
     });
   },
   ["active_varieties_catalog"],
-  { revalidate: 60 }
+  { revalidate: 60, tags: ["catalog_varieties"] }
 );

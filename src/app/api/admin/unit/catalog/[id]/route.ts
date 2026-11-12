@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getCurrentUser } from "@/lib/auth/session";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SeedClass, Database } from "@/types/database";
@@ -76,6 +77,15 @@ export async function PUT(
 
   if (updateErr) {
     return NextResponse.json({ error: updateErr.message }, { status: 500 });
+  }
+
+  // Purge public catalog cache immediately
+  try {
+    revalidatePath("/katalog");
+    revalidatePath("/ajukan");
+    revalidateTag("catalog_varieties", { expire: 0 });
+  } catch (err) {
+    console.error("Failed to revalidate catalog cache:", err);
   }
 
   return NextResponse.json({

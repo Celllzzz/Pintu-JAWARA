@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getCurrentUser } from "@/lib/auth/session";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { CommodityType, SeedClass } from "@/types/database";
+
+export const dynamic = "force-dynamic";
 
 function getAllowedCommodity(user: { role: string; team_code?: string | null }): CommodityType | null {
   if (user.role === "admin_l2") {
@@ -162,6 +165,14 @@ export async function POST(req: NextRequest) {
 
     if (insertErr) {
       return NextResponse.json({ error: insertErr.message }, { status: 500 });
+    }
+
+    try {
+      revalidatePath("/katalog");
+      revalidatePath("/ajukan");
+      revalidateTag("catalog_varieties", { expire: 0 });
+    } catch (err) {
+      console.error("Failed to revalidate catalog cache:", err);
     }
 
     return NextResponse.json({

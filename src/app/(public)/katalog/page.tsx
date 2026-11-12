@@ -2,7 +2,7 @@ import React from "react";
 import { getActiveVarieties } from "@/lib/services/catalog";
 import { CatalogClientView } from "@/components/public/CatalogClientView";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function KatalogPage() {
   const varieties = await getActiveVarieties();

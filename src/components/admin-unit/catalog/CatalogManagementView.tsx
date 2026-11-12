@@ -24,14 +24,17 @@ export function CatalogManagementView({
   const [isLoading, setIsLoading] = useState(false);
 
   // Modals state
-  const [editingVariety, setEditingVariety] = useState<VarietyItem | null>(null);
-  const [batchVariety, setBatchVariety] = useState<VarietyItem | null>(null);
+  const [editingVarietyId, setEditingVarietyId] = useState<string | null>(null);
+  const [batchVarietyId, setBatchVarietyId] = useState<string | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const editingVariety = varieties.find((v) => v.id === editingVarietyId) ?? null;
+  const batchVariety = varieties.find((v) => v.id === batchVarietyId) ?? null;
 
   const refreshData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await fetch("/api/admin/unit/catalog");
+      const res = await fetch("/api/admin/unit/catalog", { cache: "no-store" });
       const data = await res.json();
       if (res.ok) {
         setVarieties(data.varieties || []);
@@ -100,22 +103,22 @@ export function CatalogManagementView({
       <VarietyManagementTable
         varieties={varieties}
         isLoading={isLoading}
-        onEdit={(v) => setEditingVariety(v)}
-        onManageBatches={(v) => setBatchVariety(v)}
+        onEdit={(v) => setEditingVarietyId(v.id)}
+        onManageBatches={(v) => setBatchVarietyId(v.id)}
         onToggleActive={handleToggleActive}
       />
 
       {/* Edit Specifications Modal */}
       <VarietyEditModal
         variety={editingVariety}
-        onClose={() => setEditingVariety(null)}
+        onClose={() => setEditingVarietyId(null)}
         onSuccess={refreshData}
       />
 
       {/* Manage Batches & Stock Modal */}
       <BatchStockModal
         variety={batchVariety}
-        onClose={() => setBatchVariety(null)}
+        onClose={() => setBatchVarietyId(null)}
         onSuccess={refreshData}
       />
 
